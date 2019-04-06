@@ -94,4 +94,127 @@ abstract class TransformableObject{
   Vertex scaledVertex(Vertex v, float scalingFactorX, float scalingFactorY) {
     return new Vertex(v.getX() * scalingFactorX, v.getY() * scalingFactorY);
   }
+  
+    void rotate(float ang){
+    float[] center = findCenter();
+    if(this.object == null){
+      for(Edge e : simpleObject.getEdges()){
+        float[][] matrixA = {{e.getVertexA().getX()}, {e.getVertexA().getY()}, {1}};
+        float[][] matrixB = {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
+                float[][] matrixC = e.getVertexA().multMat(matrixB, matrixA);;        float[][] matrixD = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+
+                float[][] matrixE = e.getVertexA().multMat(matrixD, matrixC);
+        float[][] matrixF = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
+
+                e.getVertexA().multMat(matrixF, matrixE);
+        
+        float[][] matrixG = {{e.getVertexB().getX()}, {e.getVertexB().getY()}, {1}};
+        float[][] matrixH= {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
+        
+        float[][] matrixI = e.getVertexB().multMat(matrixH, matrixG);
+        float[][] matrixJ = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+        
+        float[][] matrixK = e.getVertexB().multMat(matrixJ, matrixI);
+        float[][] matrixL = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
+        
+        e.getVertexB().multMat(matrixL, matrixK);
+
+              }
+    }else{
+      for(Face f : object){
+        for(Edge e : f.getEdges()){
+          float[][] matrixA = {{e.getVertexA().getX()}, {e.getVertexA().getY()}, {1}};
+          float[][] matrixB = {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
+               
+          float[][] matrixC = e.getVertexA().multMat(matrixB, matrixA);
+          float[][] matrixD = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+
+          float[][] matrixE = e.getVertexA().multMat(matrixD, matrixC);
+          float[][] matrixF = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
+
+          e.getVertexA().multMat(matrixF, matrixE);
+        
+          float[][] matrixG = {{e.getVertexB().getX()}, {e.getVertexB().getY()}, {1}};
+          float[][] matrixH= {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
+          
+          float[][] matrixI = e.getVertexB().multMat(matrixH, matrixG);
+          float[][] matrixJ = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+          
+          float[][] matrixK = e.getVertexB().multMat(matrixJ, matrixI);
+          float[][] matrixL = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
+        
+          e.getVertexB().multMat(matrixL, matrixK);
+        }
+      }
+    }    
+  }
+  
+  private float[] findCenter(){
+    float[] center = new float[2];
+    float highX = 0, highY = 0;
+    float lowX = MAX_INT, lowY = MAX_INT;
+    if(this.object == null){
+      for(Edge e: simpleObject.getEdges()){
+        if(e.getVertexA().getX() > highX){
+          highX = e.getVertexA().getX();
+        }
+        if(e.getVertexA().getY() > highY){
+          highY = e.getVertexA().getY();
+        }
+        if(e.getVertexA().getX() < lowX){
+          lowX = e.getVertexA().getX();
+        }
+        if(e.getVertexA().getY() < lowY){
+          lowY = e.getVertexA().getY();
+        }
+        
+        if(e.getVertexB().getX() > highX){
+          highX = e.getVertexA().getX();
+        }
+        if(e.getVertexB().getY() > highY){
+          highY = e.getVertexA().getY();
+        }
+        if(e.getVertexB().getX() < lowX){
+          lowX = e.getVertexA().getX();
+        }
+        if(e.getVertexB().getY() < lowY){
+          lowY = e.getVertexA().getY();
+        }
+      }
+    }else{
+        for(Face f : object){
+          for(Edge e : f.getEdges()){
+            if(e.getVertexA().getX() > highX){
+              highX = e.getVertexA().getX();
+            }
+            if(e.getVertexA().getY() > highY){
+              highY = e.getVertexA().getY();
+            }
+            if(e.getVertexA().getX() < lowX){
+              lowX = e.getVertexA().getX();
+            }
+            if(e.getVertexA().getY() < lowY){
+              lowY = e.getVertexA().getY();
+            }
+            
+            if(e.getVertexB().getX() > highX){
+              highX = e.getVertexA().getX();
+            }
+            if(e.getVertexB().getY() > highY){
+              highY = e.getVertexA().getY();
+            }
+            if(e.getVertexB().getX() < lowX){
+              lowX = e.getVertexA().getX();
+            }
+            if(e.getVertexB().getY() < lowY){
+              lowY = e.getVertexA().getY();
+            }
+          }
+        }
+  }
+  center[0] = (highX + lowX)/2;
+  center[1] = (highY + lowY)/2;
+    return center;
+  }
+}
 }
