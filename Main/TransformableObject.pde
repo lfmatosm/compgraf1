@@ -12,10 +12,14 @@ abstract class TransformableObject{
     }
   }
 
-  void scale(float scalingFactor) {
+  void scale(float scalingFactorX, float scalingFactorY) {
     if ((this.objects == null) || (this.objects.size() == 0)) {
-      this.simpleObject = scaledFace(this.simpleObject, scalingFactor);
-    } else for (Face f : this.objects) f = scaledFace(f, scalingFactor);
+      this.simpleObject = scaledFace(this.simpleObject, scalingFactorX, scalingFactorY);
+    } else for (Face f : this.objects) f = scaledFace(f, scalingFactorX, scalingFactorY);
+  }
+
+  void uniformScale(float scalingFactor) {
+    scale(scalingFactor, scalingFactor);
   }
 
   void transladeEdge(Edge e, float x, float y) {
@@ -23,18 +27,18 @@ abstract class TransformableObject{
     e.getVertexB().add(new PVector(x, y));
   }
 
-  Face scaledFace(Face f, float scalingFactor) {
+  Face scaledFace(Face f, float scalingFactorX, float scalingFactorY) {
     ArrayList<Edge> newEdges =  new ArrayList<Edge>();
     for (Edge e : f.getEdges()) {
       Vertex a = e.getVertexA();
       Vertex b = e.getVertexB();
-      newEdges.add(new Edge(scaledVertex(a, scalingFactor),
-       scaledVertex(b, scalingFactor)));
+      newEdges.add(new Edge(scaledVertex(a, scalingFactorX, scalingFactorY),
+       scaledVertex(b, scalingFactorX, scalingFactorY)));
     }
     return new Face(newEdges);
   }
 
-  Vertex scaledVertex(Vertex v, float scalingFactor) {
-    return new Vertex(v.getX() * scalingFactor, v.getY() * scalingFactor);
+  Vertex scaledVertex(Vertex v, float scalingFactorX, float scalingFactorY) {
+    return new Vertex(v.getX() * scalingFactorX, v.getY() * scalingFactorY);
   }
 }

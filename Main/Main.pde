@@ -49,7 +49,7 @@ void gameScreen() {
   face.draw();
 
   Object2D obj = new Object2D(face);
-  obj.scale(.5);
+  obj.uniformScale(5);
   obj.draw();
 }
 
