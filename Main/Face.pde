@@ -5,6 +5,10 @@ class Face{
     this.edges = edges;
   }
 
+  public Edge[] getEdges(){
+    return edges;
+  }
+
   public void draw(){
     for(Edge e : edges){
       e.draw();
