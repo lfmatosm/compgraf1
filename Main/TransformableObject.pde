@@ -2,7 +2,7 @@ abstract class TransformableObject{
   ArrayList<Face> objects = new ArrayList<Face>();
   Face simpleObject;
 
-  void translade(float x, float y){
+  void translate(float x, float y){
     if ((this.objects == null) || (this.objects.size() == 0)) {
       for (Edge e : simpleObject.getEdges()) transladeEdge(e, x, y);
     } else{
