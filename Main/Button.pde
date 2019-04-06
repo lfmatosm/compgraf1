@@ -38,7 +38,6 @@ class Button {
     textSize(30);
     fill(0, 102, 153);
     text(message, buttonX + (buttonX/3.5), buttonY + (buttonY/5));
-
   }
 
   void update(int x, int y) {

@@ -1,20 +1,16 @@
 class Face{
-  private Edge[] edges;
+  private ArrayList<Edge> edges;
 
-  public Face(Edge[] edges){
+  public Face(ArrayList<Edge> edges){
     this.edges = edges;
   }
 
-  public Edge[] getEdges(){
-    return edges;
-  }
-
-  public Edge[] getEdges(){
+  public ArrayList<Edge>  getEdges(){
     return edges;
   }
 
   public void draw(){
-    for(Edge e : edges){
+    for (Edge e : edges){
       e.draw();
     }
   }
