@@ -4,7 +4,11 @@ class Face{
   public Face(Edge[] edges){
     this.edges = edges;
   }
-  
+
+  public Edge[] getEdges(){
+    return edges;
+  }
+
   public Edge[] getEdges(){
     return edges;
   }

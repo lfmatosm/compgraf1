@@ -1,4 +1,4 @@
-abstract class CGObjectTransformation2D{
+abstract class TransformableObject{
   Face[] object;
   Face simpleObject;
   

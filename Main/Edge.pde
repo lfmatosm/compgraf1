@@ -6,7 +6,7 @@ class Edge{
     this.a = a;
     this.b = b;
   }
-  
+
   public Vertex getVertexA(){
     return a;
   }
@@ -14,15 +14,15 @@ class Edge{
   public Vertex getVertexB(){
     return b;
   }
-  
+
   public void setVertexA(Vertex outro){
     a = outro;
   }
-  
+
   public void setVertexB(Vertex outro){
     b = outro;
   }
-  
+
   public void draw(){
     line(a.getX(), a.getY(), b.getX(), b.getY());
   }
