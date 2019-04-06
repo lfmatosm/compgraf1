@@ -1,21 +1,21 @@
 class Object2D extends TransformableObject{
-    
-  public Object2D(Face[] object){
-    this.object = object;
+
+  public Object2D(ArrayList<Face> objs){
+    this.objects = objs;
     this.simpleObject = null;
   }
-  
+
   public Object2D(Face object){
     this.simpleObject = object;
-    this.object = null;
+    this.objects = null;
   }
-  
+
   public void draw(){
-    if(object == null){
+    if ((objects == null) || (objects.size() == 0)) {
       simpleObject.draw();
     }
-    else{
-      for(Face f : object){
+    else {
+      for(Face f : objects){
         f.draw();
       }
     }
