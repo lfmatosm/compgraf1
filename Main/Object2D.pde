@@ -1,11 +1,11 @@
-class CGObject2D extends CGObjectTransformation2D{
+class Object2D extends TransformableObject{
     
-  public CGObject2D(Face[] object){
+  public Object2D(Face[] object){
     this.object = object;
     this.simpleObject = null;
   }
   
-  public CGObject2D(Face object){
+  public Object2D(Face object){
     this.simpleObject = object;
     this.object = null;
   }

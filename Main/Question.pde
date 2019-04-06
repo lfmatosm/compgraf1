@@ -1,5 +1,5 @@
 class Question {
-  String question = "No question."
+  String question = "No question.";
   ArrayList shapes = new ArrayList();
   ArrayList options = new ArrayList();
 
