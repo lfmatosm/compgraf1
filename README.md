@@ -9,9 +9,9 @@ Para execução do projeto, deve-se acompanhar os passos a seguir.
 
 ### Pré-requisitos
 
-* (Processing >= 3.5.3)[https://processing.org/download/] - Ambiente de programação
+* [Processing >= 3.5.3](https://processing.org/download/) - Ambiente de programação
 disponível para Windows, Linux e MacOS. A versão exata utilizada
-neste projeto é a (3.5.3)[http://download.processing.org/processing-3.5.3-linux64.tgz].
+neste projeto é a [3.5.3](http://download.processing.org/processing-3.5.3-linux64.tgz).
 
 ### Execução
 
