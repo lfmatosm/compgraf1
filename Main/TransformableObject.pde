@@ -4,10 +4,10 @@ abstract class TransformableObject{
 
   void translate(float x, float y){
     if ((this.objects == null) || (this.objects.size() == 0)) {
-      for (Edge e : simpleObject.getEdges()) transladeEdge(e, x, y);
+      for (Edge e : simpleObject.getEdges()) translateEdge(e, x, y);
     } else{
       for (Face f : this.objects){
-        for(Edge e : f.getEdges()) transladeEdge(e, x, y);
+        for(Edge e : f.getEdges()) translateEdge(e, x, y);
       }
     }
   }
@@ -45,7 +45,7 @@ abstract class TransformableObject{
     scale(scalingFactor, scalingFactor);
   }
 
-  void transladeEdge(Edge e, float x, float y) {
+  void translateEdge(Edge e, float x, float y) {
     e.getVertexA().add(new PVector(x, y));
     e.getVertexB().add(new PVector(x, y));
   }
