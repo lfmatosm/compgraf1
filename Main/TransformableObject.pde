@@ -2,26 +2,17 @@ abstract class TransformableObject{
   ArrayList<Face> objects;
   Face simpleObject;
 
-  void reflex(boolean x, boolean y){
-    int xRefl = 0;
-    int yRefl = 0;
-
-    if(x == true) xRefl = 1;
-    if(x == false) xRefl = -1;
-    if(y == true) yRefl = 1;
-    if(y == false) yRefl = -1;
+  void reflection(boolean aroundX, boolean aroundY){
+    int xRefl = 1;
+    int yRefl = 1;
+    if (aroundX) xRefl = -1;
+    if (aroundY) yRefl = -1;
 
     if ((this.objects == null) || (this.objects.size() == 0)) {
-      for (Edge e : simpleObject.getEdges()){
-        e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
-        e.getVertexB().setXY(e.getVertexB().getX()*xRefl, e.getVertexB().getY()*yRefl);
-      }
-    } else{
-      for (Face f : this.objects){
-        for(Edge e : f.getEdges()){
-          e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
-          e.getVertexB().setXY(e.getVertexB().getX()*xRefl, e.getVertexB().getY()*yRefl);
-        }
+      for (Edge e : simpleObject.getEdges()) reflectEdge(e, xRefl, yRefl);
+    } else {
+      for (Face f : this.objects) {
+        for(Edge e : f.getEdges())  reflectEdge(e, xRefl, yRefl);
       }
     }
   }
@@ -47,6 +38,11 @@ abstract class TransformableObject{
     if ((this.objects == null) || (this.objects.size() == 0)) {
       this.simpleObject = shearedFace(this.simpleObject, shearFactorX, shearFactorY);
     } else for (Face f : this.objects) f = shearedFace(f, shearFactorX, shearFactorY);
+  }
+
+  void reflectEdge(Edge e, int xRefl, int yRefl) {
+    e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
+    e.getVertexB().setXY(e.getVertexB().getX()*xRefl, e.getVertexB().getY()*yRefl);
   }
 
   Face shearedFace(Face f, float shearFactorX, float shearFactorY) {
