@@ -18,6 +18,29 @@ abstract class TransformableObject{
     } else for (Face f : this.objects) f = scaledFace(f, scalingFactorX, scalingFactorY);
   }
 
+  //Cisalhamento.
+  void shear(float shearFactorX, float shearFactorY) {
+    if ((this.objects == null) || (this.objects.size() == 0)) {
+      this.simpleObject = shearedFace(this.simpleObject, shearFactorX, shearFactorY);
+    } else for (Face f : this.objects) f = shearedFace(f, shearFactorX, shearFactorY);
+  }
+
+  Face shearedFace(Face f, float shearFactorX, float shearFactorY) {
+    ArrayList<Edge> newEdges =  new ArrayList<Edge>();
+    for (Edge e : f.getEdges()) {
+      Vertex a = e.getVertexA();
+      Vertex b = e.getVertexB();
+      newEdges.add(new Edge(shearedVertex(a, shearFactorX, shearFactorY),
+       shearedVertex(b, shearFactorX, shearFactorY)));
+    }
+    return new Face(newEdges);
+  }
+
+  Vertex shearedVertex(Vertex v, float shearFactorX, float shearFactorY) {
+    return new Vertex(v.getX() + (shearFactorX * v.getY()),
+    v.getY() + (shearFactorY * v.getX()));
+  }
+
   void uniformScale(float scalingFactor) {
     scale(scalingFactor, scalingFactor);
   }
