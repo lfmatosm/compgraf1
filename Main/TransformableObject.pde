@@ -1,15 +1,15 @@
 abstract class TransformableObject{
-  Face[] object;
+  ArrayList<Face> objects;
   Face simpleObject;
   
   void translade(float x, float y){
-    if(this.object == null){
+    if(this.objects == null){
       for(Edge e : simpleObject.getEdges()){
         e.getVertexA().add(new PVector(x, y));
         e.getVertexB().add(new PVector(x, y));
       }
     } else{
-      for(Face f : object){
+      for(Face f : objects){
         for(Edge e : f.getEdges()){
         e.getVertexA().add(new PVector(x, y));
         e.getVertexB().add(new PVector(x,y));
@@ -25,11 +25,12 @@ abstract class TransformableObject{
     if(y > 0 || y == 0) y = 1;
     if(y < 0) y = -1;
     
-    if(this.object == null){
+    if(this.objects == null){
       for(Edge e : simpleObject.getEdges()){
         e.getVertexA();
       }
-    }    
+    }
+  }
 
   void translate(float x, float y){
     if ((this.objects == null) || (this.objects.size() == 0)) {
