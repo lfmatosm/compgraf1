@@ -1,6 +1,6 @@
 class Question {
   String question = "No question.";
-  ArrayList shapes = new ArrayList();
+  ArrayList<Object2D> shapes = new ArrayList<Object2D>();
   ArrayList options = new ArrayList();
 
   public Question(String quest, ArrayList shap, ArrayList opts) {
