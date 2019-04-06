@@ -37,12 +37,20 @@ void gameScreen() {
   Edge ec = new Edge(c,d);
   Edge ed = new Edge(d,a);
 
-  Edge[] edges = {ea,eb,ec,ed};
+  ArrayList<Edge> edges = new ArrayList<Edge>();
+  edges.add(ea);
+  edges.add(eb);
+  edges.add(ec);
+  edges.add(ed);
 
   Face face = new Face(edges);
 
   stroke((sin(millis()/50)*155)+100,sin(millis()/50)*255,cos(millis()/50)*255);
   face.draw();
+
+  Object2D obj = new Object2D(face);
+  obj.scale(.5);
+  obj.draw();
 }
 
 void gameOverScreen() {
