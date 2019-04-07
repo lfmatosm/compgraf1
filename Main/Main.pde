@@ -49,7 +49,6 @@ void gameScreen() {
   face.draw();
 
   Object2D obj = new Object2D(face);
-  obj.rotate(1.);
   obj.draw();
 }
 
