@@ -2,6 +2,16 @@ abstract class TransformableObject{
   ArrayList<Face> objects;
   Face simpleObject;
 
+  Vertex transform(float[][] tr, Vertex v) {
+    Vertex u = new Vertex(v.getX(), v.getY());
+    float[][] p = {{v.getX()}, {v.getY()}};
+    float[][] t = {
+      {v.getX()-v.getX()}, {v.getY()-v.getY()}
+    };
+    float[][] tp = v.multMat(tr, t);
+    return new Vertex(tp[0][0]+u.getX(), tp[1][0]+u.getY());
+  }
+
   void reflection(boolean aroundX, boolean aroundY){
     int xRefl = 1;
     int yRefl = 1;
@@ -82,7 +92,7 @@ abstract class TransformableObject{
   }
 
   Vertex scaledVertex(Vertex v, float scalingFactorX, float scalingFactorY) {
-    return new Vertex(v.getX() * scalingFactorX, v.getY() * scalingFactorY);
+    return new Vertex((v.getX() * scalingFactorX), (v.getY() * scalingFactorY));
   }
 
   void rotate(float ang){
@@ -206,5 +216,19 @@ abstract class TransformableObject{
     center[0] = (highX + lowX)/2;
     center[1] = (highY + lowY)/2;
     return center;
+  }
+
+  Vertex centroid(Face f) {
+    List<Edge> edges = f.getEdges();
+    List<Vertex> vertex = new ArrayList<Vertex>();
+    for (Edge e : edges) vertex.addAll(e.getVertexA(), e.getVertexB());
+    return average(vertex);
+  }
+
+  Vertex average(List<Vertex> vs) {
+    if ((vs == null) || (vs.size() == 0)) return new Vertex(0., 0.);
+    float xSum = 0; float ySum = 0;
+    for (Vertex v : vs) { xSum += v.getX(); ySum += v.getY(); }
+    return new Vertex(xSum/vs.size(), ySum/vs.size());
   }
 }
