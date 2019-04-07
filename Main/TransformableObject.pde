@@ -11,14 +11,6 @@ abstract class TransformableObject{
     if(y == false) yRefl = 1;
     if(y == true) yRefl = -1;
     
-    public float getXMax(){
-      float max = 0;
-      for (Edge e : simpleObject.getEdges()){
-         if(e.getVertexA()){
-         }
-      }
-    }
-    
     if ((this.objects == null) || (this.objects.size() == 0)) {
       for (Edge e : simpleObject.getEdges()){
         /*e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
@@ -39,6 +31,14 @@ abstract class TransformableObject{
     }
     
   }
+
+  /*public float getXMax(){
+    float max = 0;
+    for (Edge e : simpleObject.getEdges()){
+        if(e.getVertexA()){
+        }
+    }
+  }*/
 
   void translate(float x, float y){
     if ((this.objects == null) || (this.objects.size() == 0)) {
