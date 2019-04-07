@@ -2,15 +2,15 @@ abstract class TransformableObject{
   ArrayList<Face> objects;
   Face simpleObject;
 
-  Vertex transform(float[][] tr, Vertex v) {
-    Vertex u = new Vertex(v.getX(), v.getY());
-    float[][] p = {{v.getX()}, {v.getY()}};
-    float[][] t = {
-      {v.getX()-v.getX()}, {v.getY()-v.getY()}
-    };
-    float[][] tp = v.multMat(tr, t);
-    return new Vertex(tp[0][0]+u.getX(), tp[1][0]+u.getY());
-  }
+  // Vertex transform(float[][] tr, Vertex v) {
+  //   Vertex u = new Vertex(v.getX(), v.getY());
+  //   float[][] p = {{v.getX()}, {v.getY()}};
+  //   float[][] t = {
+  //     {v.getX()-v.getX()}, {v.getY()-v.getY()}
+  //   };
+  //   float[][] tp = v.multMat(tr, t);
+  //   return new Vertex(tp[0][0]+u.getX(), tp[1][0]+u.getY());
+  // }
 
   void reflection(boolean aroundX, boolean aroundY){
     int xRefl = 1;
@@ -22,7 +22,7 @@ abstract class TransformableObject{
       for (Edge e : simpleObject.getEdges()) reflectEdge(e, xRefl, yRefl);
     } else {
       for (Face f : this.objects) {
-        for(Edge e : f.getEdges())  reflectEdge(e, xRefl, yRefl);
+        for (Edge e : f.getEdges()) reflectEdge(e, xRefl, yRefl);
       }
     }
   }
@@ -80,14 +80,32 @@ abstract class TransformableObject{
     e.getVertexB().add(new PVector(x, y));
   }
 
+  void translateVertex(Vertex v, float x, float y) {
+    v.add(new PVector(x, y));
+  }
+
   Face scaledFace(Face f, float scalingFactorX, float scalingFactorY) {
+    // Vertex center = centroid(f);
     ArrayList<Edge> newEdges =  new ArrayList<Edge>();
     for (Edge e : f.getEdges()) {
-      Vertex a = e.getVertexA();
-      Vertex b = e.getVertexB();
-      newEdges.add(new Edge(scaledVertex(a, scalingFactorX, scalingFactorY),
-      scaledVertex(b, scalingFactorX, scalingFactorY)));
+      Vertex a = new Vertex(e.getVertexA().getX(), e.getVertexA().getY());
+      Vertex b = new Vertex(e.getVertexB().getX(), e.getVertexB().getY());
+      // Vertex aDist = a.distanceTo(center);
+      // Vertex bDist = b.distanceTo(center);
+      // translateVertex(a, -aDist.getX(), -aDist.getY());
+      // translateVertex(b, -bDist.getX(), -bDist.getY());
+      Edge newE = new Edge(scaledVertex(a, scalingFactorX, scalingFactorY),
+      scaledVertex(b, scalingFactorX, scalingFactorY));
+      // translateVertex(aDist, center.getX(), center.getY());
+      // translateVertex(bDist, center.getX(), center.getY());
+      // newE.setVertexA(aDist); newE.setVertexB(bDist);
+      newEdges.add(newE);
     }
+    // Face newF = new Face(newEdges);
+    // Vertex upmF = uppermostVertex(f);
+    // Vertex upmNewF = uppermostVertex(newF);
+    // upmNewF.sub(upmF);
+    // for (Edge e : newEdges) translateEdge(e, -upmNewF.getX(), -upmNewF.getY());
     return new Face(newEdges);
   }
 
@@ -219,13 +237,28 @@ abstract class TransformableObject{
   }
 
   Vertex centroid(Face f) {
-    List<Edge> edges = f.getEdges();
-    List<Vertex> vertex = new ArrayList<Vertex>();
-    for (Edge e : edges) vertex.addAll(e.getVertexA(), e.getVertexB());
+    ArrayList<Edge> edges = f.getEdges();
+    ArrayList<Vertex> vertex = new ArrayList<Vertex>();
+    for (Edge e : edges) {
+      vertex.add(e.getVertexA()); vertex.add(e.getVertexB());
+    }
     return average(vertex);
   }
 
-  Vertex average(List<Vertex> vs) {
+  Vertex uppermostVertex(Face f) {
+    Vertex upm = new Vertex(-5000, -5000);
+    ArrayList<Edge> edges = f.getEdges();
+    ArrayList<Vertex> vertex = new ArrayList<Vertex>();
+    for (Edge e : edges) {
+      vertex.add(e.getVertexA()); vertex.add(e.getVertexB());
+    }
+    for (Vertex v : vertex) {
+      if (v.biggerThan(upm)) upm = new Vertex(v.getX(), v.getY());
+    }
+    return upm;
+  }
+
+  Vertex average(ArrayList<Vertex> vs) {
     if ((vs == null) || (vs.size() == 0)) return new Vertex(0., 0.);
     float xSum = 0; float ySum = 0;
     for (Vertex v : vs) { xSum += v.getX(); ySum += v.getY(); }
