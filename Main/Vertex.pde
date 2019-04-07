@@ -24,6 +24,19 @@ class Vertex {
   public float getY() {
     return this.vector.y;
   }
+  
+  public void setX(float x){
+    this.vector.x = x;
+  }
+  
+   public void setY(float y){
+    this.vector.y = y;
+  }
+  
+  public void setXY(float x, float y){
+    this.vector.x = x;
+    this.vector.y = y;
+  }
 
   public void printVertex(){
     println("( " + vector.x + ", " + vector.y + ", " + vector.z + " )");
@@ -46,6 +59,35 @@ class Vertex {
     vector.x += x;
     vector.y += y;
     vector.z += z;
+  }
+  
+  public float[][] multMat(float[][] a, float[][] b) {
+    int aRows = a.length;
+    int aColumns = a[0].length;
+    int bRows = b.length;
+    int bColumns = b[0].length;
+
+    if (aColumns != bRows) {
+        throw new IllegalArgumentException("A:Rows: " + aColumns + " did not match B:Columns " + bRows + ".");
+    }
+
+    float[][] c = new float[aRows][bColumns];
+    for (int i = 0; i < aRows; i++) {
+        for (int j = 0; j < bColumns; j++) {
+            c[i][j] = 0.00000;
+        }
+    }
+
+    for (int i = 0; i < aRows; i++) { // aRow
+        for (int j = 0; j < bColumns; j++) { // bColumn
+            for (int k = 0; k < aColumns; k++) { // aColumn
+                c[i][j] += a[i][k] * b[k][j];
+            }
+        }
+    }
+    vector.x = c[0][0];
+    vector.y = c[0][1];
+    return(c);
   }
 
   public void sub(Vertex v){

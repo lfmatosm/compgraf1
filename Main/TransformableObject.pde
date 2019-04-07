@@ -2,34 +2,42 @@ abstract class TransformableObject{
   ArrayList<Face> objects;
   Face simpleObject;
   
-  void translade(float x, float y){
-    if(this.objects == null){
-      for(Edge e : simpleObject.getEdges()){
-        e.getVertexA().add(new PVector(x, y));
-        e.getVertexB().add(new PVector(x, y));
+  void reflex(boolean x, boolean y){
+    int xRefl = 0;
+    int yRefl = 0;
+    
+    if(x == false) xRefl = 1;
+    if(x == true) xRefl = -1;
+    if(y == false) yRefl = 1;
+    if(y == true) yRefl = -1;
+    
+    public float getXMax(){
+      float max = 0;
+      for (Edge e : simpleObject.getEdges()){
+         if(e.getVertexA()){
+         }
+      }
+    }
+    
+    if ((this.objects == null) || (this.objects.size() == 0)) {
+      for (Edge e : simpleObject.getEdges()){
+        /*e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
+        e.getVertexB().setXY(e.getVertexB().getX()*xRefl , e.getVertexB().getY()*yRefl);*/
+        
+        if(x == true || y == true){
+          translateEdge(e, e.getVertexA().getX() - 2*e.getVertexA().getX(),  e.getVertexA().getY()*(-1));
+        }
+        
       }
     } else{
-      for(Face f : objects){
+      for (Face f : this.objects){
         for(Edge e : f.getEdges()){
-        e.getVertexA().add(new PVector(x, y));
-        e.getVertexB().add(new PVector(x,y));
+          e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
+          e.getVertexB().setXY(e.getVertexB().getX()*xRefl, e.getVertexB().getY()*yRefl);
         }
       }
     }
-  }
-  
-  void reflex(int x, int y){
-    //Prevenção de má interação.
-    if(x > 0 || x == 0) x = 1;
-    if(x < 0) x = -1;
-    if(y > 0 || y == 0) y = 1;
-    if(y < 0) y = -1;
     
-    if(this.objects == null){
-      for(Edge e : simpleObject.getEdges()){
-        e.getVertexA();
-      }
-    }
   }
 
   void translate(float x, float y){
