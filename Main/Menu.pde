@@ -1,4 +1,4 @@
-class Menu{
+class Menu {
   String btnStartMsg = "Iniciar jogo";
   String title = "Psicotécnico v. 0.1";
   Button btnStart;

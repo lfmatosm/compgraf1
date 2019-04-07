@@ -1,5 +1,5 @@
 class Vertex {
-  private PVector vector;
+  public PVector vector;
 
   public Vertex(int x, int y) {
     vector = new PVector(x, y, 0);
@@ -109,5 +109,51 @@ class Vertex {
 
   public void div(float n){
     vector.div(n);
+  }
+
+  public float[][] multMat(float[][] a, float[][] b) {
+    int aRows = a.length;
+    int aColumns = a[0].length;
+    int bRows = b.length;
+    int bColumns = b[0].length;
+
+    if (aColumns != bRows) {
+      throw new IllegalArgumentException("A:Rows: " + aColumns +
+      " did not match B:Columns " + bRows + ".");
+    }
+
+    float[][] c = new float[aRows][bColumns];
+    for (int i = 0; i < aRows; i++) {
+      for (int j = 0; j < bColumns; j++) {
+        c[i][j] = 0.00000;
+      }
+    }
+
+    for (int i = 0; i < aRows; i++) { // aRow
+      for (int j = 0; j < bColumns; j++) { // bColumn
+        for (int k = 0; k < aColumns; k++) { // aColumn
+          c[i][j] += a[i][k] * b[k][j];
+        }
+      }
+    }
+    vector.x = c[0][0];
+    vector.y = c[1][0];
+    return(c);
+  }
+
+  public void setXY(float x, float y){
+    this.vector.x = x;
+    this.vector.y = y;
+  }
+
+  public Vertex distanceTo(Vertex other) {
+    PVector u = new PVector(this.vector.x, this.vector.y);
+    u.sub(new PVector(other.getX(), other.getY()));
+    return new Vertex(u.x, u.y);
+  }
+
+  public boolean biggerThan(Vertex other) {
+    if ((this.vector.x < other.getX()) && (this.vector.y > other.getY())) return true;
+    else return false;
   }
 }

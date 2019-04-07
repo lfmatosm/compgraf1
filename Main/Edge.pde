@@ -14,10 +14,16 @@ class Edge{
     this.rgb = rgb;
   }
 
+  public Edge(Vertex a, Vertex b, int[] rgb){
+    this.a = a;
+    this.b = b;
+    this.rgb = rgb;
+  }
+
   public Vertex getVertexA(){
     return a;
   }
-  
+
   public Vertex getVertexB(){
     return b;
   }
