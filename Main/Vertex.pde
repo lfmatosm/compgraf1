@@ -1,5 +1,5 @@
 class Vertex {
-  private PVector vector;
+  public PVector vector;
 
   public Vertex(int x, int y) {
     vector = new PVector(x, y, 0);
@@ -105,6 +105,13 @@ class Vertex {
   }
 
   public Vertex distanceTo(Vertex other) {
-    return new Vertex(this.vector.x-other.getX(), this.vector.y-other.getY());
+    PVector u = new PVector(this.vector.x, this.vector.y);
+    u.sub(new PVector(other.getX(), other.getY()));
+    return new Vertex(u.x, u.y);
+  }
+
+  public boolean biggerThan(Vertex other) {
+    if ((this.vector.x < other.getX()) && (this.vector.y > other.getY())) return true;
+    else return false;
   }
 }
