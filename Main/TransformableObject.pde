@@ -2,34 +2,34 @@ abstract class TransformableObject{
   ArrayList<Face> objects;
   Face simpleObject;
   
-  void reflex(boolean x, boolean y){
+  //Reflete um Objeto em relação a x ou y;
+  void reflect(boolean aroundX, boolean aroundY){
     int xRefl = 0;
     int yRefl = 0;
     
-    if(x == false) xRefl = 1;
-    if(x == true) xRefl = -1;
-    if(y == false) yRefl = 1;
-    if(y == true) yRefl = -1;
+    if(aroundX == false) xRefl = 1;
+    if(aroundX == true) xRefl = -1;
+    if(aroundY == false) yRefl = 1;
+    if(aroundY == true) yRefl = -1;
+
+    PVector centroAntigo = getCenter();
+    translateToOrign();
     
     if ((this.objects == null) || (this.objects.size() == 0)) {
       for (Edge e : simpleObject.getEdges()){
-        /*e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
-        e.getVertexB().setXY(e.getVertexB().getX()*xRefl , e.getVertexB().getY()*yRefl);*/
-        
-        if(x == true || y == true){
-          translateEdge(e, e.getVertexA().getX() - 2*e.getVertexA().getX(),  e.getVertexA().getY()*(-1));
-        }
-        
+        e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
       }
+      translate(centroAntigo.x, centroAntigo.y);
     } else{
       for (Face f : this.objects){
         for(Edge e : f.getEdges()){
           e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
-          e.getVertexB().setXY(e.getVertexB().getX()*xRefl, e.getVertexB().getY()*yRefl);
         }
       }
+      translate(centroAntigo.x, centroAntigo.y);
     }
-    
+  }
+
 
   // Vertex transform(float[][] tr, Vertex v) {
   //   Vertex u = new Vertex(v.getX(), v.getY());
@@ -41,6 +41,7 @@ abstract class TransformableObject{
   //   return new Vertex(tp[0][0]+u.getX(), tp[1][0]+u.getY());
   // }
 
+  // DELETAR
   void reflection(boolean aroundX, boolean aroundY){
     int xRefl = 1;
     int yRefl = 1;
@@ -56,14 +57,51 @@ abstract class TransformableObject{
     }
   }
 
-  /*public float getXMax(){
-    float max = 0;
+  //Pega o maior X e o maior Y (Pontos Diferentes)
+  public PVector getXYMax(){
+    float xMax = 0;
+    float yMax = 0;
     for (Edge e : simpleObject.getEdges()){
-        if(e.getVertexA()){
-        }
-    }
-  }*/
+      if(e.getVertexA().getX() > xMax) xMax = e.getVertexA().getX();
+      if(e.getVertexB().getX() > xMax) xMax = e.getVertexB().getX();
 
+      if(e.getVertexA().getY() > yMax) yMax = e.getVertexA().getY();
+      if(e.getVertexB().getY() > yMax) yMax = e.getVertexB().getY();
+    }
+    return new PVector(xMax,yMax);
+  }
+
+  //Pega o menor X e o menor Y (Pontos Diferentes)
+  public PVector getXYMin(){
+    float xMin = 800;
+    float yMin = 600;
+    for (Edge e : simpleObject.getEdges()){
+      if(e.getVertexA().getX() < xMin) xMin = e.getVertexA().getX();
+      if(e.getVertexB().getX() < xMin) xMin = e.getVertexB().getX();
+
+      if(e.getVertexA().getY() < yMin) yMin = e.getVertexA().getY();
+      if(e.getVertexB().getY() < yMin) yMin = e.getVertexB().getY();
+    }
+    return new PVector(xMin, yMin);
+  }
+
+  //Retorna a um PVector com a coordenada do centro do Objeto
+  public PVector getCenter(){
+    PVector maxXY = getXYMax();
+    PVector minXY = getXYMin();
+
+    float xMed = (maxXY.x + minXY.x)/2;
+    float yMed = (maxXY.y + minXY.y)/2;
+
+    return new PVector(xMed, yMed);
+  }
+
+  public void translateToOrign(){
+    PVector center = getCenter();
+    translate(-center.x, -center.y);
+  }
+
+  //Translada um Objeto somando uma coordenada (x,y) em seus Vertex
   void translate(float x, float y){
     if ((this.objects == null) || (this.objects.size() == 0)) {
       for (Edge e : simpleObject.getEdges()) translateEdge(e, x, y);
@@ -114,7 +152,6 @@ abstract class TransformableObject{
 
   void translateEdge(Edge e, float x, float y) {
     e.getVertexA().add(new PVector(x, y));
-    e.getVertexB().add(new PVector(x, y));
   }
 
   void translateVertex(Vertex v, float x, float y) {
@@ -150,6 +187,7 @@ abstract class TransformableObject{
     return new Vertex((v.getX() * scalingFactorX), (v.getY() * scalingFactorY));
   }
 
+  //FIXME
   void rotate(float ang){
     float[] center = findCenter();
     if (this.objects == null){
@@ -205,6 +243,7 @@ abstract class TransformableObject{
     }
   }
 
+  //DELETAR?
   private float[] findCenter(){
     float[] center = new float[2];
     float highX = 0, highY = 0;

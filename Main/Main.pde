@@ -6,7 +6,7 @@ int gameState = MENU;
 Menu menu;
 
 void setup() {
-  size(800,600);
+  size(800, 600);
 }
 
 void draw() {
@@ -32,10 +32,10 @@ void gameScreen() {
   Vertex c = new Vertex(100,100);
   Vertex d = new Vertex(100,50);
 
-  Edge ea = new Edge(a,b);
-  Edge eb = new Edge(b,c);
-  Edge ec = new Edge(c,d);
-  Edge ed = new Edge(d,a);
+  Edge ea = new Edge(a,b, new int[]{255,0,0});
+  Edge eb = new Edge(b,c, new int[]{255,255,0});
+  Edge ec = new Edge(c,d, new int[]{255,0,255});
+  Edge ed = new Edge(d,a, new int[]{0,255,0});
 
   ArrayList<Edge> edges = new ArrayList<Edge>();
   edges.add(ea);
@@ -44,11 +44,16 @@ void gameScreen() {
   edges.add(ed);
 
   Face face = new Face(edges);
-
-  stroke((sin(millis()/50)*155)+100,sin(millis()/50)*255,cos(millis()/50)*255);
   face.draw();
 
   Object2D obj = new Object2D(face);
+  
+
+  //obj.translateToOrign();
+  PVector centro = obj.getCenter();
+  println("X - "+centro.x+"\nY - "+centro.y);
+  obj.reflex(true, true);
+  obj.translate(52, 0);
   obj.draw();
 }
 
