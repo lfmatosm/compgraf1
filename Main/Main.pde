@@ -52,7 +52,7 @@ void gameScreen() {
   //obj.translateToOrign();
   PVector centro = obj.getCenter();
   println("X - "+centro.x+"\nY - "+centro.y);
-  obj.reflex(true, true);
+  obj.reflect(true, true);
   obj.translate(52, 0);
   obj.draw();
 }
