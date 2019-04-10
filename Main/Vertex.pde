@@ -24,15 +24,15 @@ class Vertex {
   public float getY() {
     return this.vector.y;
   }
-  
+
   public void setX(float x){
     this.vector.x = x;
   }
-  
+
    public void setY(float y){
     this.vector.y = y;
   }
-  
+
   public void setXY(float x, float y){
     this.vector.x = x;
     this.vector.y = y;
@@ -60,7 +60,7 @@ class Vertex {
     vector.y += y;
     vector.z += z;
   }
-  
+
   public float[][] multMat(float[][] a, float[][] b) {
     int aRows = a.length;
     int aColumns = a[0].length;
@@ -85,8 +85,10 @@ class Vertex {
             }
         }
     }
+    System.out.println("Lsize: " + c.length);
+    System.out.println("Csize: " + c[0].length);
     vector.x = c[0][0];
-    vector.y = c[0][1];
+    vector.y = c[1][0];
     return(c);
   }
 
