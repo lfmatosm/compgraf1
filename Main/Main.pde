@@ -47,13 +47,11 @@ void gameScreen() {
   face.draw();
 
   Object2D obj = new Object2D(face);
-  
 
   //obj.translateToOrign();
   PVector centro = obj.getCenter();
   println("X - "+centro.x+"\nY - "+centro.y);
-  obj.reflect(true, true);
-  obj.translate(52, 0);
+  obj.reflection(false, true);
   obj.draw();
 }
 
