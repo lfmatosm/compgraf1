@@ -1,20 +1,20 @@
 abstract class TransformableObject{
   ArrayList<Face> objects;
   Face simpleObject;
-  
+
   //Reflete um Objeto em relação a x ou y;
-  void reflect(boolean aroundX, boolean aroundY){
+  void reflection(boolean aroundX, boolean aroundY){
     int xRefl = 0;
     int yRefl = 0;
-    
+
     if(aroundX == false) xRefl = 1;
     if(aroundX == true) xRefl = -1;
     if(aroundY == false) yRefl = 1;
     if(aroundY == true) yRefl = -1;
 
     PVector centroAntigo = getCenter();
-    translateToOrign();
-    
+    translateToOrigin();
+
     if ((this.objects == null) || (this.objects.size() == 0)) {
       for (Edge e : simpleObject.getEdges()){
         e.getVertexA().setXY(e.getVertexA().getX()*xRefl, e.getVertexA().getY()*yRefl);
@@ -40,22 +40,6 @@ abstract class TransformableObject{
   //   float[][] tp = v.multMat(tr, t);
   //   return new Vertex(tp[0][0]+u.getX(), tp[1][0]+u.getY());
   // }
-
-  // DELETAR
-  void reflection(boolean aroundX, boolean aroundY){
-    int xRefl = 1;
-    int yRefl = 1;
-    if (aroundX) xRefl = -1;
-    if (aroundY) yRefl = -1;
-
-    if ((this.objects == null) || (this.objects.size() == 0)) {
-      for (Edge e : simpleObject.getEdges()) reflectEdge(e, xRefl, yRefl);
-    } else {
-      for (Face f : this.objects) {
-        for (Edge e : f.getEdges()) reflectEdge(e, xRefl, yRefl);
-      }
-    }
-  }
 
   //Pega o maior X e o maior Y (Pontos Diferentes)
   public PVector getXYMax(){
@@ -96,7 +80,7 @@ abstract class TransformableObject{
     return new PVector(xMed, yMed);
   }
 
-  public void translateToOrign(){
+  public void translateToOrigin(){
     PVector center = getCenter();
     translate(-center.x, -center.y);
   }
@@ -114,8 +98,8 @@ abstract class TransformableObject{
 
   void scale(float scalingFactorX, float scalingFactorY) {
     if ((this.objects == null) || (this.objects.size() == 0)) {
-      this.simpleObject = scaledFace(this.simpleObject, scalingFactorX, scalingFactorY);
-    } else for (Face f : this.objects) f = scaledFace(f, scalingFactorX, scalingFactorY);
+      scaleFace(this.simpleObject, scalingFactorX, scalingFactorY);
+    } else for (Face f : this.objects) scaleFace(f, scalingFactorX, scalingFactorY);
   }
 
   //Cisalhamento.
@@ -158,29 +142,17 @@ abstract class TransformableObject{
     v.add(new PVector(x, y));
   }
 
-  Face scaledFace(Face f, float scalingFactorX, float scalingFactorY) {
-    // Vertex center = centroid(f);
+  void scaleFace(Face f, float scalingFactorX, float scalingFactorY) {
+    PVector centroAntigo = getCenter();
+    translateToOrigin();
     ArrayList<Edge> newEdges =  new ArrayList<Edge>();
     for (Edge e : f.getEdges()) {
-      Vertex a = new Vertex(e.getVertexA().getX(), e.getVertexA().getY());
-      Vertex b = new Vertex(e.getVertexB().getX(), e.getVertexB().getY());
-      // Vertex aDist = a.distanceTo(center);
-      // Vertex bDist = b.distanceTo(center);
-      // translateVertex(a, -aDist.getX(), -aDist.getY());
-      // translateVertex(b, -bDist.getX(), -bDist.getY());
-      Edge newE = new Edge(scaledVertex(a, scalingFactorX, scalingFactorY),
-      scaledVertex(b, scalingFactorX, scalingFactorY));
-      // translateVertex(aDist, center.getX(), center.getY());
-      // translateVertex(bDist, center.getX(), center.getY());
-      // newE.setVertexA(aDist); newE.setVertexB(bDist);
-      newEdges.add(newE);
+      Vertex a = e.getVertexA();
+      e.getVertexA().setXY(a.getX()*scalingFactorX, a.getY()*scalingFactorY);
+
     }
-    // Face newF = new Face(newEdges);
-    // Vertex upmF = uppermostVertex(f);
-    // Vertex upmNewF = uppermostVertex(newF);
-    // upmNewF.sub(upmF);
-    // for (Edge e : newEdges) translateEdge(e, -upmNewF.getX(), -upmNewF.getY());
-    return new Face(newEdges);
+    translate(centroAntigo.x, centroAntigo.y);
+    return;
   }
 
   Vertex scaledVertex(Vertex v, float scalingFactorX, float scalingFactorY) {
