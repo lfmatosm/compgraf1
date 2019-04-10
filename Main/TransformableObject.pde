@@ -30,17 +30,6 @@ abstract class TransformableObject{
     }
   }
 
-
-  // Vertex transform(float[][] tr, Vertex v) {
-  //   Vertex u = new Vertex(v.getX(), v.getY());
-  //   float[][] p = {{v.getX()}, {v.getY()}};
-  //   float[][] t = {
-  //     {v.getX()-v.getX()}, {v.getY()-v.getY()}
-  //   };
-  //   float[][] tp = v.multMat(tr, t);
-  //   return new Vertex(tp[0][0]+u.getX(), tp[1][0]+u.getY());
-  // }
-
   //Pega o maior X e o maior Y (Pontos Diferentes)
   public PVector getXYMax(){
     float xMax = 0;
@@ -283,34 +272,5 @@ abstract class TransformableObject{
     center[0] = (highX + lowX)/2;
     center[1] = (highY + lowY)/2;
     return center;
-  }
-
-  Vertex centroid(Face f) {
-    ArrayList<Edge> edges = f.getEdges();
-    ArrayList<Vertex> vertex = new ArrayList<Vertex>();
-    for (Edge e : edges) {
-      vertex.add(e.getVertexA()); vertex.add(e.getVertexB());
-    }
-    return average(vertex);
-  }
-
-  Vertex uppermostVertex(Face f) {
-    Vertex upm = new Vertex(-5000, -5000);
-    ArrayList<Edge> edges = f.getEdges();
-    ArrayList<Vertex> vertex = new ArrayList<Vertex>();
-    for (Edge e : edges) {
-      vertex.add(e.getVertexA()); vertex.add(e.getVertexB());
-    }
-    for (Vertex v : vertex) {
-      if (v.biggerThan(upm)) upm = new Vertex(v.getX(), v.getY());
-    }
-    return upm;
-  }
-
-  Vertex average(ArrayList<Vertex> vs) {
-    if ((vs == null) || (vs.size() == 0)) return new Vertex(0., 0.);
-    float xSum = 0; float ySum = 0;
-    for (Vertex v : vs) { xSum += v.getX(); ySum += v.getY(); }
-    return new Vertex(xSum/vs.size(), ySum/vs.size());
   }
 }
