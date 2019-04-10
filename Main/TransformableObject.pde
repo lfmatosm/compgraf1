@@ -159,7 +159,8 @@ abstract class TransformableObject{
     return new Vertex((v.getX() * scalingFactorX), (v.getY() * scalingFactorY));
   }
 
-  //FIXME
+  //Recebe um ângulo em radianos e executa a rotação do objeto relativa ao ângulo,
+  //no sentido anti-horário.
   void rotate(float ang){
     float[] center = findCenter();
     if (this.objects == null){
