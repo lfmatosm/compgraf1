@@ -161,14 +161,14 @@ abstract class TransformableObject{
 
   //Recebe um ângulo em radianos e executa a rotação do objeto relativa ao ângulo,
   //no sentido anti-horário.
-  void rotate(float ang){
+  void rotate(float rad){
     float[] center = findCenter();
     if (this.objects == null){
       for(Edge e : simpleObject.getEdges()){
         float[][] matrixA = {{e.getVertexA().getX()}, {e.getVertexA().getY()}, {1}};
         float[][] matrixB = {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
         float[][] matrixC = e.getVertexA().multMat(matrixB, matrixA);
-        float[][] matrixD = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+        float[][] matrixD = {{cos(rad), -sin(rad), 0}, {sin(rad), cos(rad), 0}, {0,0,1}};
 
         float[][] matrixE = e.getVertexA().multMat(matrixD, matrixC);
         float[][] matrixF = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
@@ -179,7 +179,7 @@ abstract class TransformableObject{
         float[][] matrixH= {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
 
         float[][] matrixI = e.getVertexB().multMat(matrixH, matrixG);
-        float[][] matrixJ = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+        float[][] matrixJ = {{cos(rad), -sin(rad), 0}, {sin(rad), cos(rad), 0}, {0,0,1}};
 
         float[][] matrixK = e.getVertexB().multMat(matrixJ, matrixI);
         float[][] matrixL = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
@@ -194,7 +194,7 @@ abstract class TransformableObject{
           float[][] matrixB = {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
 
           float[][] matrixC = e.getVertexA().multMat(matrixB, matrixA);
-          float[][] matrixD = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+          float[][] matrixD = {{cos(rad), -sin(rad), 0}, {sin(rad), cos(rad), 0}, {0,0,1}};
 
           float[][] matrixE = e.getVertexA().multMat(matrixD, matrixC);
           float[][] matrixF = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
@@ -205,7 +205,7 @@ abstract class TransformableObject{
           float[][] matrixH= {{1,0,-center[0]}, {0,1,-center[1]}, {0,0,1}};
 
           float[][] matrixI = e.getVertexB().multMat(matrixH, matrixG);
-          float[][] matrixJ = {{cos(ang), -sin(ang), 0}, {sin(ang), cos(ang), 0}, {0,0,1}};
+          float[][] matrixJ = {{cos(rad), -sin(rad), 0}, {sin(rad), cos(rad), 0}, {0,0,1}};
 
           float[][] matrixK = e.getVertexB().multMat(matrixJ, matrixI);
           float[][] matrixL = {{1, 0, center[0]}, {0, 1, center[1]}, {0, 0, 1}};
