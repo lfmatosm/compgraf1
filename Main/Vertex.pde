@@ -61,37 +61,6 @@ class Vertex {
     vector.z += z;
   }
 
-  public float[][] multMat(float[][] a, float[][] b) {
-    int aRows = a.length;
-    int aColumns = a[0].length;
-    int bRows = b.length;
-    int bColumns = b[0].length;
-
-    if (aColumns != bRows) {
-        throw new IllegalArgumentException("A:Rows: " + aColumns + " did not match B:Columns " + bRows + ".");
-    }
-
-    float[][] c = new float[aRows][bColumns];
-    for (int i = 0; i < aRows; i++) {
-        for (int j = 0; j < bColumns; j++) {
-            c[i][j] = 0.00000;
-        }
-    }
-
-    for (int i = 0; i < aRows; i++) { // aRow
-        for (int j = 0; j < bColumns; j++) { // bColumn
-            for (int k = 0; k < aColumns; k++) { // aColumn
-                c[i][j] += a[i][k] * b[k][j];
-            }
-        }
-    }
-    System.out.println("Lsize: " + c.length);
-    System.out.println("Csize: " + c[0].length);
-    vector.x = c[0][0];
-    vector.y = c[1][0];
-    return(c);
-  }
-
   public void sub(Vertex v){
     vector.sub(v.vector);
   }
@@ -114,8 +83,8 @@ class Vertex {
   }
 
   public double euclideanDistanceTo(Vertex other) {
-    return Math.sqrt(Math.pow(this.vector.x-other.getX(), 2) +
-           Math.pow(this.vector.y-other.getY(), 2));
+    return Math.sqrt(Math.pow((double)this.vector.x-other.getX(), 2) +
+           Math.pow((double)this.vector.y-other.getY(), 2));
   }
 
   public boolean biggerThan(Vertex other) {
@@ -123,13 +92,17 @@ class Vertex {
     else return false;
   }
 
+  //Converte o vértice para uma representação em matriz com coordenada homogênea.
   public float[][] toMatrix() {
     return new float[][]{{this.vector.x}, {this.vector.y}, {1}};
   }
 
+  //Converte uma dada matriz de representação para o vértice atual.
   public void toVertex(float[][] mtx) {
-    this.vector = (mtx[0][2] == 0.) ?
-                new PVector(mtx[0][1], mtx[0][1], 0) :
-                new PVector(mtx[0][1], mtx[0][1], mtx[0][2]);
+    this.vector = (mtx[2][0] == 0.) ?
+                new PVector(mtx[0][0], mtx[1][0], 0.) :
+                new PVector(mtx[0][0], mtx[1][0], mtx[2][0]);
   }
+
+  public String toString() { return "(" + this.vector.x + ", " + this.vector.y + ")\n"; }
 }
