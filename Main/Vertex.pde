@@ -113,14 +113,23 @@ class Vertex {
     vector.div(n);
   }
 
-  public Vertex distanceTo(Vertex other) {
-    PVector u = new PVector(this.vector.x, this.vector.y);
-    u.sub(new PVector(other.getX(), other.getY()));
-    return new Vertex(u.x, u.y);
+  public double euclideanDistanceTo(Vertex other) {
+    return Math.sqrt(Math.pow(this.vector.x-other.getX(), 2) +
+           Math.pow(this.vector.y-other.getY(), 2));
   }
 
   public boolean biggerThan(Vertex other) {
     if ((this.vector.x < other.getX()) && (this.vector.y > other.getY())) return true;
     else return false;
+  }
+
+  public float[][] toMatrix() {
+    return new float[][]{{this.vector.x}, {this.vector.y}, {1}};
+  }
+
+  public void toVertex(float[][] mtx) {
+    this.vector = (mtx[0][2] == 0.) ?
+                new PVector(mtx[0][1], mtx[0][1], 0) :
+                new PVector(mtx[0][1], mtx[0][1], mtx[0][2]);
   }
 }
