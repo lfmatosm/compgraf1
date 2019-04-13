@@ -34,10 +34,16 @@ void gameScreen() {
 
   Star t3 = new Star(250,50,50);
 
-  t1.rotate(20.);
+  t1.translate(20., 50.);
+  t1.scale(3.);
+  t1.rotate(50.);
+  t1.shear(2., 1.5);
   t1.draw();
-  t2.rotate(25.);
+
+  t2.scale(2.);
   t2.draw();
+
+  t3.rotate(40.);
   t3.draw();
 }
 
