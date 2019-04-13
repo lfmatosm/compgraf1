@@ -5,8 +5,8 @@ class Face{
     this.edges = edges;
   }
 
-  public ArrayList<Edge>  getEdges(){
-    return edges;
+  public ArrayList<Edge> getEdges(){
+    return this.edges;
   }
 
   public void draw(){
