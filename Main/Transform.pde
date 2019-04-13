@@ -1,5 +1,8 @@
+//Abstração de uma transformação. Utilizando multiplicação de matrizes,
+//as classes-filhas de Transform podem transformar objetos 2D.
 abstract class Transform {
-  float[][] t = {{}};
+  float[][] t = new float[3][3];
+  String name;
 
   public float[][] multiply(float[][] other) {
     if (this.t[0].length != other.length) {
@@ -16,5 +19,17 @@ abstract class Transform {
         }
     }
     return mtx;
+  }
+
+  public void showMtx(float[][] mtx) {
+    String str = ""; int i = 0; int j = 0;
+    for (; i < mtx.length; i++) {
+      for (; j < mtx[0].length; j++) {
+          str += mtx[i][j] + " ";
+      }
+      str += "\n";
+    }
+    print("\n" + str + "\n" + "Qty. rows: " + mtx.length + "\tQty. columns: " +
+    mtx[0].length + "\n");
   }
 }
