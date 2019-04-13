@@ -1,4 +1,4 @@
-class Star extends Object2D {
+class Star extends TransformableObject {
 
   //Face face;
 

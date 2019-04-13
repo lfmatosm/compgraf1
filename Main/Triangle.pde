@@ -1,4 +1,4 @@
-class Triangle extends Object2D{
+class Triangle extends TransformableObject {
 
   //Face face;
 

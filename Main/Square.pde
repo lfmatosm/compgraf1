@@ -1,4 +1,4 @@
-class Square extends Object2D {
+class Square extends TransformableObject {
 
   // Face face;
 
