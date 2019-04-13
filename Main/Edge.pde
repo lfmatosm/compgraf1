@@ -7,7 +7,7 @@ class Edge{
     this.a = a;
     this.b = b;
   }
-  
+
    public Edge(Vertex a, Vertex b, int[] rgb){
     this.a = a;
     this.b = b;
@@ -39,4 +39,7 @@ class Edge{
       noStroke();
     }
   }
+
+  public String toString() { return "[(" + a.getX() + ","+a.getY() +
+   ")---("+b.getX()+","+b.getY()+ ")]\n"; }
 }
