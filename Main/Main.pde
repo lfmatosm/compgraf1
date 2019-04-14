@@ -6,7 +6,7 @@ int gameState = MENU;
 Menu menu;
 
 void setup() {
-  size(800, 600);
+  size(400, 600);
 }
 
 void draw() {
@@ -28,23 +28,63 @@ void gameScreen() {
   text("O jogo começou!", height/1.5, width/1.5);
   fill(0, 102, 153);
 
-  Square t1 = new Square(50,50,50,50);
 
-  Triangle t2 = new Triangle(150,50,50);
-
-  Star t3 = new Star(250,50,50);
-
-  t1.translate(20., 50.);
-  t1.scale(3.);
-  t1.rotate(50.);
-  t1.shear(2., 1.5);
-  t1.draw();
-
-  t2.scale(2.);
-  t2.draw();
-
-  t3.rotate(40.);
-  t3.draw();
+//level1
+  Triangle s1 = new Triangle(50,50,50);
+  s1.rotate(30.);
+  s1.translate(0.,10.);
+  Square s2 = new Square(50,50,50,50);
+  s2.translate(100.,0.);
+  Triangle s3 = new Triangle(50,50,50);
+  s3.translate(220.,-10.);
+  s3.rotate(90.);
+  Triangle s4 = new Triangle(50,50,50);
+  s4.translate(0., 100.);
+  s4.rotate(210.);
+  Triangle s5 = new Triangle(50,50,50);
+  s5.rotate(30.);
+  s5.translate(110.,110.);
+  Square s6 = new Square(50,50,50,50);
+  s6.translate(210,100);
+  Triangle s7 = new Triangle(50,50,50);
+  s7.rotate(30.);
+  s1.translate(0, 200);
+  Triangle s8 = new Triangle(50,50,50);
+  s8.translate(110.,190.);
+  s8.rotate(90.);
+  Triangle s9 = new Triangle(50,50,50);
+  s9.rotate(30.);
+  s9.translate(0.,360);
+  Square s10 = new Square(50,50,50,50);
+  s10.translate(100,350);
+  Square s11 = new Square(50,50,50,50);
+  s11.translate(200,350);
+  Triangle s12 = new Triangle(50,50,50);
+  s12.rotate(210);
+  s12.translate(0,450);
+  Triangle s13 = new Triangle(50,50,50);
+  s13.translate(110,460);
+  s13.rotate(30);
+  Triangle s14 = new Triangle(50,50,50);
+  s14.rotate(210);
+  s14.translate(210,440);
+  
+  
+  
+  s1.draw();
+  s2.draw();
+  s3.draw();
+  s4.draw();
+  s5.draw();
+  s6.draw();
+  s7.draw();
+  s8.draw();
+  s9.draw();
+  s10.draw();
+  s11.draw();
+  s12.draw();
+  s13.draw();
+  s14.draw();
 }
 
 void gameOverScreen() {

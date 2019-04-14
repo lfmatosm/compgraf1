@@ -3,6 +3,7 @@ class Question {
   ArrayList<TransformableObject> shapes = new ArrayList<TransformableObject>();
   ArrayList<Button> options = new ArrayList<Button>();
   private int correctAnswer;
+  boolean result;
 
   public Question(String quest, ArrayList<TransformableObject> shap,
   ArrayList<Button> opts,
