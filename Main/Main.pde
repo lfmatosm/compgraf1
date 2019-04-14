@@ -46,9 +46,8 @@ void gameScreen() {
   s5.translate(110.,110.);
   Square s6 = new Square(50,50,50,50);
   s6.translate(210,100);
-  Triangle s7 = new Triangle(50,50,50);
-  s7.rotate(30.);
-  s1.translate(0, 200);
+  Square s7 = new Square(50,50,50,50);
+  s7.translate(-10., 200);
   Triangle s8 = new Triangle(50,50,50);
   s8.translate(110.,190.);
   s8.rotate(90.);
