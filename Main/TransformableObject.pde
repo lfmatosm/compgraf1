@@ -82,16 +82,16 @@ abstract class TransformableObject {
   //Troca a escala do objeto de acordo com os fatores de escala passados.
   public void scale(float xFactor, float yFactor) {
     Vertex centroid = this.centroid();
-    print("Centroid: "+centroid+"\n");
+    // print("Centroid: "+centroid+"\n");
     TranslateTransform tt1 = new TranslateTransform(-centroid.getX(),
     -centroid.getY());
     ScaleTransform sclt = new ScaleTransform(xFactor, yFactor);
     TranslateTransform tt2 = new TranslateTransform(centroid.getX(),
     centroid.getY());
 
-    print("Translate T1 matrix:"+this.showMtx(tt1.t));
-    print("Translate SCLT matrix:"+this.showMtx(sclt.t));
-    print("Translate T2 matrix:"+this.showMtx(tt2.t));
+    // print("Translate T1 matrix:"+this.showMtx(tt1.t));
+    // print("Translate SCLT matrix:"+this.showMtx(sclt.t));
+    // print("Translate T2 matrix:"+this.showMtx(tt2.t));
 
     TransformChain chain = new TransformChain();
     chain.add(tt1); chain.add(sclt); chain.add(tt2);
@@ -103,16 +103,16 @@ abstract class TransformableObject {
   //Rotaciona um objeto em torno de seu centróide.
   public void rotate(float rad) {
     Vertex centroid = this.centroid();
-    print("Centroid: "+centroid+"\n");
+    // print("Centroid: "+centroid+"\n");
     TranslateTransform tt1 = new TranslateTransform(-centroid.getX(),
     -centroid.getY());
     RotationTransform rtt = new RotationTransform(rad);
     TranslateTransform tt2 = new TranslateTransform(centroid.getX(),
     centroid.getY());
 
-    print("Translate T1 matrix:"+this.showMtx(tt1.t));
-    print("Translate RTT matrix:"+this.showMtx(rtt.t));
-    print("Translate T2 matrix:"+this.showMtx(tt2.t));
+    // print("Translate T1 matrix:"+this.showMtx(tt1.t));
+    // print("Translate RTT matrix:"+this.showMtx(rtt.t));
+    // print("Translate T2 matrix:"+this.showMtx(tt2.t));
 
     TransformChain chain = new TransformChain();
     chain.add(tt1); chain.add(rtt); chain.add(tt2);
@@ -129,16 +129,16 @@ abstract class TransformableObject {
   //Cisalha o objeto de forma distinta em cada eixo.
   public void shear(float xFactor, float yFactor) {
     Vertex centroid = this.centroid();
-    print("Centroid: "+centroid+"\n");
+    // print("Centroid: "+centroid+"\n");
     TranslateTransform tt1 = new TranslateTransform(-centroid.getX(),
     -centroid.getY());
     ShearTransform sht = new ShearTransform(xFactor, yFactor);
     TranslateTransform tt2 = new TranslateTransform(centroid.getX(),
     centroid.getY());
 
-    print("Translate T1 matrix:"+this.showMtx(tt1.t));
-    print("Translate SHT matrix:"+this.showMtx(sht.t));
-    print("Translate T2 matrix:"+this.showMtx(tt2.t));
+    // print("Translate T1 matrix:"+this.showMtx(tt1.t));
+    // print("Translate SHT matrix:"+this.showMtx(sht.t));
+    // print("Translate T2 matrix:"+this.showMtx(tt2.t));
 
     TransformChain chain = new TransformChain();
     chain.add(tt1); chain.add(sht); chain.add(tt2);
@@ -152,7 +152,7 @@ abstract class TransformableObject {
     TranslateTransform tt = new TranslateTransform(xFactor,
     yFactor);
 
-    print("Translate T1 matrix:"+this.showMtx(tt.t));
+    // print("Translate T1 matrix:"+this.showMtx(tt.t));
 
     TransformChain chain = new TransformChain();
     chain.add(tt);
@@ -221,17 +221,28 @@ abstract class TransformableObject {
     return average(vertices);
   }
 
-  Vertex getUppermostVertex(Face f) {
-    Vertex upm = new Vertex(-(float)Double.MAX_VALUE, -(float)Double.MAX_VALUE);
-    ArrayList<Edge> edges = f.getEdges();
-    ArrayList<Vertex> vertex = new ArrayList<Vertex>();
-    for (Edge e : edges) {
-      vertex.add(e.getVertexA()); vertex.add(e.getVertexB());
-    }
-    for (Vertex v : vertex) {
-      if (v.biggerThan(upm)) upm = new Vertex(v.getX(), v.getY());
+  Vertex getUppermostVertex() {
+    Vertex upm = null;
+    ArrayList<Vertex> vertices = this.getVertices();
+    for (Vertex v : vertices) {
+      if (upm == null) upm = new Vertex(v.getX(), v.getY());
+      else if (v.getY() < upm.getY()) upm = new Vertex(v.getX(), v.getY());
     }
     return upm;
+  }
+
+  Vertex getRightmostVertex() {
+    Vertex upm = null;
+    ArrayList<Vertex> vertices = this.getVertices();
+    for (Vertex v : vertices) {
+      if (upm == null) upm = new Vertex(v.getX(), v.getY());
+      else if (v.getX() < upm.getX()) upm = new Vertex(v.getX(), v.getY());
+    }
+    return upm;
+  }
+
+  Vertex getOriginVertex() {
+    return new Vertex(this.getRightmostVertex().getX(), this.getUppermostVertex().getY());
   }
 
   //Retorna o vértice (x', y') que é o ponto médio do conj. de vértices
