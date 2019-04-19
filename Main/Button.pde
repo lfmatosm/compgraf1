@@ -7,9 +7,6 @@ class Button {
   protected color currColor;
   protected boolean overBtn = false;
 
-  public final color DEFAULT_REGULAR_COLOR = color(255, 255, 255);
-  public final color DEFAULT_HIGHLIGHT_COLOR = color(200, 200, 200);
-
   public Button(String msg, int x, int y, int sizeX, int sizeY, color normal, color highlight) {
     message = msg;
     btnX = x;
@@ -40,23 +37,20 @@ class Button {
     textAlign(CENTER);
     textSize(30);
     fill(0, 102, 153);
-    text(message, btnX + (btnX/3.5), btnY + (btnY/5));
+    text(message, btnX + btnX/1.4, btnY + btnY/5);
   }
 
   void update(int x, int y) {
-    if (overButton())
-      overBtn = true;
+    if (overButton(x, y)) overBtn = true;
     else overBtn = false;
   }
 
-  void mousePressed() {
-    if (overBtn) currColor = btnColor;
-  }
+  void mousePressed() { if (overBtn) currColor = btnColor; }
 
-  boolean overButton()  {
-    if (mouseX >= btnX && mouseX <= btnX+btnWidth &&
-    mouseY >= btnY && mouseY <= btnY+btnHeight) return true;
-    else return false;
+  boolean overButton(int mX, int mY)  {
+    // print("Mouse is over button at (" + btnX + "," + btnY + ")\n");
+    return (mX >= btnX && mX <= btnX+btnWidth &&
+        mY >= btnY && mY <= btnY+btnHeight) ? true : false;
   }
 
   int getX() {return btnX;}

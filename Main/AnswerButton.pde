@@ -1,34 +1,26 @@
-// class AnswerButton extends Button {
-//     private ArrayList<TransformableObject> objects = new ArrayList<TransformableObject>();
-
-//     public AnswerButton(TransformableObject obj, int x, int y, 
-//     int sizeX, int sizeY) {
-//         super(x, y, sizeX, sizeY, this.DEFAULT_REGULAR_COLOR, this.DEFAULT_HIGHLIGHT_COLOR);
-//         this.objects.add(obj);
-//     }
+class AnswerButton extends Button {
+    private ArrayList<TransformableObject> objects = new ArrayList<TransformableObject>();
     
-//     public AnswerButton(TransformableObject obj, int x, int y, 
-//     int sizeX, int sizeY, color normal, color highlight) {
-//         super(x, y, sizeX, sizeY, normal, highlight);
-//         this.objects.add(obj);
-//     }
+    public AnswerButton(TransformableObject obj, int x, int y, 
+    int sizeX, int sizeY, color regular, color highlight) {
+        super(x, y, sizeX, sizeY, regular, highlight);
+        this.objects.add(obj);
+    }
 
-//     public AnswerButton(ArrayList<TransformableObject> objs, int x, int y, 
-//     int sizeX, int sizeY, color normal, color highlight) {
-//         super(x, y, sizeX, sizeY, normal, highlight);
-//         this.objects = objs;
-//     }
+    public AnswerButton(ArrayList<TransformableObject> objs, int x, int y, 
+    int sizeX, int sizeY, color regular, color highlight) {
+        super(x, y, sizeX, sizeY, regular, highlight);
+        this.objects = objs;
+    }
 
-//     void draw() {
-//         update(mouseX, mouseY);
+    void draw() {
+        update(mouseX, mouseY);
 
-//         if (buttonOver) fill(buttonHighlight);
-//         else fill(buttonColor);
-//         stroke(255);
-//         rect(buttonX, buttonY, buttonSizeX, buttonSizeY);
+        if (overBtn) fill(btnHighlight);
+        else fill(btnColor);
+        // stroke(0);
+        rect(btnX, btnY, btnWidth, btnHeight);
 
-//         for (TransformableObject obj : this.objects) obj.draw();
-
-//         // fill(0, 102, 153);
-//     }
-// }
+        for (TransformableObject obj : this.objects) obj.draw();
+    }
+}

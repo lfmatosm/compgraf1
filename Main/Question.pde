@@ -2,14 +2,14 @@ class Question {
   String question = "Qual imagem completa a sequência?";
   ArrayList<TransformableObject> shapes = new ArrayList<TransformableObject>();
   // ArrayList<AnswerButton> options = new ArrayList<AnswerButton>();
-  ArrayList<TransformableObject> options = new ArrayList<TransformableObject>();
+  ArrayList<AnswerButton> options = new ArrayList<AnswerButton>();
   private int correctAnswer;
   boolean result, isActive;
 
   public Question() {}
 
   public Question(ArrayList<TransformableObject> shap,
-  ArrayList<TransformableObject> opts,
+  ArrayList<AnswerButton> opts,
   int corrAns) {
     this.shapes = shap;
     this.options = opts;
@@ -18,7 +18,7 @@ class Question {
   }
   
   public Question(String quest, ArrayList<TransformableObject> shap,
-  ArrayList<TransformableObject> opts,
+  ArrayList<AnswerButton> opts,
   int corrAns) {
     this.question = quest;
     this.shapes = shap;
@@ -35,7 +35,7 @@ class Question {
       text(question, 200, 20);
 
       for (TransformableObject obj : shapes) obj.draw();
-      for (TransformableObject b : options) b.draw();
+      for (AnswerButton b : options) b.draw();
     }
   }
 

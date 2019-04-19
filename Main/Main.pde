@@ -22,95 +22,11 @@ void menuScreen() {
 }
 
 void gameScreen() {
-  //Testes da classe Face.
   background(255);
-  textSize(30);
-  text("O jogo começou!", height/1.5, width/1.5);
-  fill(0, 102, 153);
 
   QuestionBuilder builder = new QuestionBuilder();
   Question q1 = builder.buildQuestion(1);
   q1.draw();
-
-// //level1
-//   Triangle s1 = new Triangle(50,50,50);
-//   s1.rotate(30.);
-//   s1.translate(0.,10.);
-//   Square s2 = new Square(50,50,50,50);
-//   s2.translate(100.,0.);
-//   Triangle s3 = new Triangle(50,50,50);
-//   s3.translate(220.,-10.);
-//   s3.rotate(90.);
-//   Triangle s4 = new Triangle(50,50,50);
-//   s4.translate(0., 100.);
-//   s4.rotate(210.);
-//   Triangle s5 = new Triangle(50,50,50);
-//   s5.rotate(30.);
-//   s5.translate(110.,110.);
-//   Square s6 = new Square(50,50,50,50);
-//   s6.translate(210,100);
-//   Square s7 = new Square(50,50,50,50);
-//   s7.translate(-10., 200);
-//   Triangle s8 = new Triangle(50,50,50);
-//   s8.translate(110.,190.);
-//   s8.rotate(90.);
-  
-//   Square s2Aux = new Square(50,50,50,50);
-//   s2Aux.translate(100.,0.);
-//   s2Aux.scale(.5);
-//   Triangle s4Aux = new Triangle(50,50,50);
-//   s4Aux.translate(0., 100.);
-//   s4Aux.rotate(210.);
-//   s4Aux.scale(.5);
-  
-//   Triangle s9 = new Triangle(50,50,50);
-//   s9.rotate(30.);
-//   s9.translate(0.,360);
-//   Square s10 = new Square(50,50,50,50);
-//   s10.translate(100,350);
-//   Square s11 = new Square(50,50,50,50);
-//   s11.translate(200,350);
-//   Triangle s12 = new Triangle(50,50,50);
-//   s12.rotate(210);
-//   s12.translate(0,450);
-//   Triangle s13 = new Triangle(50,50,50);
-//   s13.translate(110,460);
-//   s13.rotate(30);
-//   Triangle s14 = new Triangle(50,50,50);
-//   s14.rotate(210);
-//   s14.translate(210,440);
-   
-//   Triangle s9Aux = new Triangle(50,50,50);
-//   s9Aux.rotate(30.);
-//   s9Aux.translate(0.,360);
-//   s9Aux.scale(.5);
-//   Square s11Aux = new Square(50,50,50,50);
-//   s11Aux.translate(200,350);
-//   s11Aux.scale(.5f);
-//   Triangle s12Aux = new Triangle(50,50,50);
-//   s12Aux.rotate(210);
-//   s12Aux.translate(0,450);
-//   s12Aux.scale(.5);
-  
-//   s1.draw();
-//   s2.draw();
-//   s3.draw();
-//   s4.draw();
-//   s5.draw();
-//   s6.draw();
-//   s7.draw();
-//   s8.draw();
-//   s9.draw();
-//   s10.draw();
-//   s11.draw();
-//   s12.draw();
-//   s13.draw();
-//   s14.draw();
-//   s2Aux.draw();
-//   s4Aux.draw();
-//   s9Aux.draw();
-//   s11Aux.draw();
-//   s12Aux.draw();
   
 //   background(255);  
 // //level2
