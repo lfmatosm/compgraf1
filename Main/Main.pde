@@ -4,6 +4,9 @@ final int GAME_OVER = 2;
 
 int gameState = MENU;
 Menu menu;
+QuestionManager manager = new QuestionManager();
+
+static int score = 0;
 
 void setup() {
   size(400, 600);
@@ -26,9 +29,16 @@ void gameScreen() {
 
   QuestionBuilder builder = new QuestionBuilder();
   Question q1 = builder.buildQuestion(1);
-  q1.draw();
+
+  ArrayList<Question> questions = new ArrayList<Question>();
+  questions.add(q1);
+  manager = new QuestionManager(questions);
+  manager.nextQuestion();
   
-//   background(255);  
+  manager.draw();
+  print("Score: " + score + "\n");
+    
+
 // //level2
 
 //   Lines3 s15 = new Lines3(50,50,50,50);
@@ -90,11 +100,14 @@ void gameScreen() {
 }
 
 void gameOverScreen() {
-  //Todo.
+  exit();
 }
 
 public void mousePressed() {
-  if ((gameState == MENU) && (menu.mouseOverButton())) {
-      gameState = GAME_SCREEN;
+  if ((gameState == MENU) && (menu.mouseOverButton())) gameState = GAME_SCREEN;
+  if ((gameState == GAME_SCREEN) && (manager.gameHasEnded)) {
+    score += manager.handleClick();
+    gameState = GAME_OVER;
   }
+  if (gameState == GAME_SCREEN) score += manager.handleClick();
 }

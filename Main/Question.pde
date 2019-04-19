@@ -1,30 +1,28 @@
 class Question {
   String question = "Qual imagem completa a sequência?";
   ArrayList<TransformableObject> shapes = new ArrayList<TransformableObject>();
-  // ArrayList<AnswerButton> options = new ArrayList<AnswerButton>();
   ArrayList<AnswerButton> options = new ArrayList<AnswerButton>();
-  private int correctAnswer;
-  boolean result, isActive;
+  int correctAnswer, value;
+  public int result = 0;
+  private boolean isActive, btnPressed;
 
   public Question() {}
 
   public Question(ArrayList<TransformableObject> shap,
   ArrayList<AnswerButton> opts,
-  int corrAns) {
+  int corrAns, int val) {
     this.shapes = shap;
     this.options = opts;
     this.correctAnswer = corrAns;
     this.isActive = true;
+    this.value = val;
   }
   
   public Question(String quest, ArrayList<TransformableObject> shap,
   ArrayList<AnswerButton> opts,
-  int corrAns) {
+  int corrAns, int val) {
+    this(shap, opts, corrAns, val);
     this.question = quest;
-    this.shapes = shap;
-    this.options = opts;
-    this.correctAnswer = corrAns;
-    this.isActive = true;
   }
 
   void draw() {
@@ -37,17 +35,20 @@ class Question {
       for (TransformableObject obj : shapes) obj.draw();
       for (AnswerButton b : options) b.draw();
     }
+    
   }
 
-  // void mousePressed() {
-  //   int i = 0;
-  //   for (AnswerButton b : options) {
-  //     if (b.overButton())
-  //   }
-  // }
-
-  int dropQuestion() {
-    background(255);
-    return 0;
+  int getPressedButton() {
+    int i = 0;
+    for (AnswerButton b : options) {
+      if (b.overButton(mouseX, mouseY)) {
+        print("Button " + i + " clicked.\n");
+        btnPressed = true;
+        isActive = false;
+        return i;
+      } 
+      i++;
+    }
+    return -1;
   }
 }

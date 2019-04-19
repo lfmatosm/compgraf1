@@ -1,25 +1,45 @@
 class QuestionManager {
   ArrayList<Question> questions = new ArrayList<Question>();
-  int currentQuest = 0;
+  int currIndex = -1;
+  Question current = null;
+  boolean gameHasEnded = false;
 
-  public QuestionManager(ArrayList questionList) {
+  public QuestionManager() {}
+
+  public QuestionManager(ArrayList<Question> questionList) {
     questions = questionList;
   }
 
-  public void invokeQuestion(){
-    
+  public void nextQuestion() {
+    if (current != null) this.dropQuestion();
+    if (this.hasNextQuestion()) current = questions.get((++currIndex) % questions.size());
+    else gameHasEnded = true;
   }
 
+  void dropQuestion() {
+    background(255);
+  }
 
-  public String CountPoints(){
-    int sum = 0;
-    int total = 0;
-    for(Question q : questions){
-      if(q.result == true){
-        sum += 1;
+  public boolean hasNextQuestion() { return (currIndex < questions.size()-1) ? true : false; }
+
+  void draw() {
+    if (current != null) current.draw();
+
+    textAlign(CENTER);
+    textSize(20);
+    fill(0, 102, 153);
+    text((currIndex+1) + "/" + questions.size(), width-(width/2), height-(height/40));
+  }
+
+  int handleClick() {
+    if (current != null) {
+      int pressedIndex = current.getPressedButton();
+      if (pressedIndex > -1) {
+        int total = (pressedIndex == current.correctAnswer) ? current.value : 0;
+        this.nextQuestion();
+        return total;
       }
-      total += 1;
     }
-    return("You've answered correctly " + sum + " questions of " + total);
-  }  
+    return 0;
+  } 
 }

@@ -1,9 +1,10 @@
 class QuestionBuilder {
     final int PADDING = 5;
-    final int OBJ_WIDTH = 55;
-    final int OBJ_HEIGHT = 55;
-    final int SIZE_X = OBJ_WIDTH + PADDING;
-    final int SIZE_Y = OBJ_HEIGHT + PADDING;
+    final int OBJ_SIZE = 50;
+    final int BTN_WIDTH = 55;
+    final int BTN_HEIGHT = 55;
+    final int SIZE_X = BTN_WIDTH + PADDING;
+    final int SIZE_Y = BTN_HEIGHT + PADDING;
     final color REGULAR_COLOR = color(255, 255, 255);
     final color HIGHLIGHT_COLOR = color(200, 100, 200);
 
@@ -13,32 +14,32 @@ class QuestionBuilder {
         Question q = new Question();
         if (i == 1) {
             //level1
-            Triangle s1 = new Triangle(50,50,50);
+            Triangle s1 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s1.rotate(30.);
             s1.translate(0.,10.);
-            Square s2 = new Square(50,50,50,50);
+            Square s2 = new Square(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s2.translate(100.,0.);
-            Triangle s3 = new Triangle(50,50,50);
+            Triangle s3 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s3.translate(220.,-10.);
             s3.rotate(90.);
-            Triangle s4 = new Triangle(50,50,50);
+            Triangle s4 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s4.translate(0., 100.);
             s4.rotate(210.);
-            Triangle s5 = new Triangle(50,50,50);
+            Triangle s5 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s5.rotate(30.);
             s5.translate(110.,110.);
-            Square s6 = new Square(50,50,50,50);
+            Square s6 = new Square(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s6.translate(210,100);
-            Square s7 = new Square(50,50,50,50);
+            Square s7 = new Square(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s7.translate(-10., 200);
-            Triangle s8 = new Triangle(50,50,50);
+            Triangle s8 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s8.translate(110.,190.);
             s8.rotate(90.);
 
-            Square s2Aux = new Square(50,50,50,50);
+            Square s2Aux = new Square(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s2Aux.translate(100.,0.);
             s2Aux.scale(.5);
-            Triangle s4Aux = new Triangle(50,50,50);
+            Triangle s4Aux = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s4Aux.translate(0., 100.);
             s4Aux.rotate(210.);
             s4Aux.scale(.5);
@@ -48,31 +49,31 @@ class QuestionBuilder {
             shapes.add(s5); shapes.add(s6); shapes.add(s7); 
             shapes.add(s8); 
             
-            Triangle s9 = new Triangle(50,50,50);
+            Triangle s9 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s9.rotate(30.);
             s9.translate(0.,360);
-            Square s10 = new Square(50,50,50,50);
+            Square s10 = new Square(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s10.translate(100,350);
-            Square s11 = new Square(50,50,50,50);
+            Square s11 = new Square(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s11.translate(200,350);
-            Triangle s12 = new Triangle(50,50,50);
+            Triangle s12 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s12.rotate(210);
             s12.translate(0,450);
-            Triangle s13 = new Triangle(50,50,50);
+            Triangle s13 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s13.translate(110,460);
             s13.rotate(30);
-            Triangle s14 = new Triangle(50,50,50);
+            Triangle s14 = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s14.rotate(210);
             s14.translate(210,440);
 
-            Triangle s9Aux = new Triangle(50,50,50);
+            Triangle s9Aux = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s9Aux.rotate(30.);
             s9Aux.translate(0.,360);
             s9Aux.scale(.5);
-            Square s11Aux = new Square(50,50,50,50);
+            Square s11Aux = new Square(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s11Aux.translate(200,350);
             s11Aux.scale(.5f);
-            Triangle s12Aux = new Triangle(50,50,50);
+            Triangle s12Aux = new Triangle(OBJ_SIZE, OBJ_SIZE, OBJ_SIZE);
             s12Aux.rotate(210);
             s12Aux.translate(0,450);
             s12Aux.scale(.5);
@@ -105,8 +106,8 @@ class QuestionBuilder {
             options.add(a1); options.add(a2); options.add(a3);
             options.add(a4); options.add(a5); options.add(a6);
 
-            int correct = 1;
-            q = new Question(shapes, options, correct);
+            int correct = 1; int value = 10;
+            q = new Question(shapes, options, correct, value);
         }
         return q;
     }
