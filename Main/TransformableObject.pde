@@ -221,8 +221,8 @@ abstract class TransformableObject {
     return average(vertices);
   }
 
-  Vertex uppermostVertex(Face f) {
-    Vertex upm = new Vertex(-5000, -5000);
+  Vertex getUppermostVertex(Face f) {
+    Vertex upm = new Vertex(-(float)Double.MAX_VALUE, -(float)Double.MAX_VALUE);
     ArrayList<Edge> edges = f.getEdges();
     ArrayList<Vertex> vertex = new ArrayList<Vertex>();
     for (Edge e : edges) {

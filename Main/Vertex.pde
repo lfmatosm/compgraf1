@@ -88,8 +88,7 @@ class Vertex {
   }
 
   public boolean biggerThan(Vertex other) {
-    if ((this.vector.x < other.getX()) && (this.vector.y > other.getY())) return true;
-    else return false;
+    return ((this.vector.x < other.getX()) && (this.vector.y > other.getY())) ? true : false;
   }
 
   //Converte o vértice para uma representação em matriz com coordenada homogênea.

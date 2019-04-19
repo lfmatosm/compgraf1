@@ -1,64 +1,66 @@
 class Button {
-  private String message = "No message";
-  private int buttonX, buttonY;
-  private int buttonSizeX = 90;
-  private int buttonSizeY = 90;
-  private color buttonColor, buttonHighlight, baseColor;
-  private color currentColor;
-  private boolean buttonOver = false;
+  protected String message = "No message";
+  protected int btnX, btnY;
+  protected int btnWidth = 90;
+  protected int btnHeight = 90;
+  protected color btnColor, btnHighlight, baseColor;
+  protected color currColor;
+  protected boolean overBtn = false;
+
+  public final color DEFAULT_REGULAR_COLOR = color(255, 255, 255);
+  public final color DEFAULT_HIGHLIGHT_COLOR = color(200, 200, 200);
 
   public Button(String msg, int x, int y, int sizeX, int sizeY, color normal, color highlight) {
     message = msg;
-    buttonX = x;
-    buttonY = y;
-    buttonSizeX = sizeX;
-    buttonSizeY = sizeY;
-    buttonColor = normal;
-    buttonHighlight = highlight;
+    btnX = x;
+    btnY = y;
+    btnWidth = sizeX;
+    btnHeight = sizeY;
+    btnColor = normal;
+    btnHighlight = highlight;
   }
 
   public Button(int x, int y, int sizeX, int sizeY, color normal, color highlight) {
-    buttonX = x;
-    buttonY = y;
-    buttonSizeX = sizeX;
-    buttonSizeY = sizeY;
-    buttonColor = normal;
-    buttonHighlight = highlight;
+    btnX = x;
+    btnY = y;
+    btnWidth = sizeX;
+    btnHeight = sizeY;
+    btnColor = normal;
+    btnHighlight = highlight;
   }
 
   void draw() {
     update(mouseX, mouseY);
 
-    if (buttonOver) fill(buttonHighlight);
-    else fill(buttonColor);
+    if (overBtn) fill(btnHighlight);
+    else fill(btnColor);
     stroke(255);
-    rect(buttonX, buttonY, buttonSizeX, buttonSizeY);
+    rect(btnX, btnY, btnWidth, btnHeight);
 
     textAlign(CENTER);
     textSize(30);
     fill(0, 102, 153);
-    text(message, buttonX + (buttonX/3.5), buttonY + (buttonY/5));
+    text(message, btnX + (btnX/3.5), btnY + (btnY/5));
   }
 
   void update(int x, int y) {
-    if (overButton(buttonX, buttonY, buttonSizeX, buttonSizeY))
-      buttonOver = true;
-    else buttonOver = false;
+    if (overButton())
+      overBtn = true;
+    else overBtn = false;
   }
 
   void mousePressed() {
-    if (buttonOver)
-      currentColor = buttonColor;
+    if (overBtn) currColor = btnColor;
   }
 
-  boolean overButton(int x, int y, int width, int height)  {
-    if (mouseX >= x && mouseX <= x+width &&
-    mouseY >= y && mouseY <= y+height) return true;
+  boolean overButton()  {
+    if (mouseX >= btnX && mouseX <= btnX+btnWidth &&
+    mouseY >= btnY && mouseY <= btnY+btnHeight) return true;
     else return false;
   }
 
-  int getX() {return buttonX;}
-  int getY() {return buttonY;}
-  int getSizeX() {return buttonSizeX;}
-  int getSizeY() {return buttonSizeY;}
+  int getX() {return btnX;}
+  int getY() {return btnY;}
+  int getSizeX() {return btnWidth;}
+  int getSizeY() {return btnHeight;}
 }

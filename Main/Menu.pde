@@ -17,7 +17,6 @@ class Menu {
   }
 
   boolean mouseOverButton() {
-    return btnStart.overButton(btnStart.getX(), btnStart.getY(), btnStart.getSizeX(),
-    btnStart.getSizeY());
+    return btnStart.overButton();
   }
 }
