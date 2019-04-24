@@ -1,7 +1,5 @@
 class Pentagon extends TransformableObject {
 
-  Face face;
-
   public Pentagon(float posX, float posY, float sideLen){
     Vertex a = new Vertex(posX, posY);
     Vertex b = new Vertex(posX + sideLen/3, posY + sideLen);
@@ -22,6 +20,6 @@ class Pentagon extends TransformableObject {
     edges.add(cd);
     edges.add(da);
 
-    face = new Face(edges);
+    this.simpleObject = new Face(edges);
   }
 }

@@ -3,6 +3,7 @@ class QuestionManager {
   int currIndex = -1;
   Question current = null;
   boolean gameHasEnded = false;
+  boolean answered = true;
 
   public QuestionManager() {}
 
@@ -11,9 +12,16 @@ class QuestionManager {
   }
 
   public void nextQuestion() {
-    if (current != null) this.dropQuestion();
-    if (this.hasNextQuestion()) current = questions.get((++currIndex) % questions.size());
-    else gameHasEnded = true;
+    if(answered){
+      if (this.hasNextQuestion()){
+        current = questions.get((++currIndex) % questions.size());
+      }
+      if (current != null){
+        answered = false;
+        this.dropQuestion();
+      }
+      else gameHasEnded = true;
+    }
   }
 
   void dropQuestion() {
@@ -37,6 +45,7 @@ class QuestionManager {
       if (pressedIndex > -1) {
         int total = (pressedIndex == current.correctAnswer) ? current.value : 0;
         this.nextQuestion();
+        answered = true;
         return total;
       }
     }
