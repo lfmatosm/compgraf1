@@ -31,9 +31,12 @@ void draw() {
 }
 
 void menuScreen() {
-  background(0);
+  background(255);
   menu = new Menu();
   menu.draw();
+  Isometric3DSquare isometric3D = new Isometric3DSquare(100,100,100);
+  isometric3D.translate(30,-30);
+  isometric3D.draw();
 }
 
 void gameScreen() {
