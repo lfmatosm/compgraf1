@@ -22,7 +22,6 @@ Utilizando o Processing IDE, deve-se executar o arquivo 'Main.pde'.
 * **Luiz Felipe de Melo** - *Implementação, documentação.* - [lffloyd](https://github.com/lffloyd)
 * **Breno Santos** - *Implementação, documentação.* - [BrenoReisSantos](https://github.com/BrenoReisSantos)
 * **Vítor Costa** - *Implementação, documentação.* - [vitorhardoim](https://github.com/vitorhardoim)
-* **Eduardo Carneiro** - *Implementação, documentação.* - [eduardotcarneiro](https://github.com/eduardotcarneiro)
 
 Veja a lista de [contribuidores](https://github.com/lffloyd/compgraf1/contributors) participantes no projeto.
 
